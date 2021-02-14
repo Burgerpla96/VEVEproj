@@ -1,2 +1,2 @@
 # VEVEproj
-spring web + python flask, android app
+spring web
