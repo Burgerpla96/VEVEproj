@@ -1,0 +1,741 @@
+/* ==========================================================================
+    글씨체
+   ========================================================================== */
+@font-face {
+    src : url("../fonts/NanumSquareRoundL.ttf");
+    font-family: "basic"
+}
+@font-face {
+    src : url("../fonts/NanumSquareL.ttf");
+    font-family: "basic-L"
+}
+@font-face {
+    src : url("../fonts/NanumSquareR.ttf");
+    font-family: "basic-R"
+}
+@font-face {
+    src : url("../fonts/NanumSquareB.ttf");
+    font-family: "basic-B"
+}
+@font-face {
+    src : url("../fonts/NanumSquareEB.ttf");
+    font-family: "basic-EB"
+}
+@font-face {
+    src : url("../fonts/a바른생각.ttf");
+    font-family: "BI"
+}
+
+
+
+/* ==========================================================================
+    기본 스타일 적용
+   ========================================================================== */
+html,
+body {
+    font-family: 'basic';
+    font-size: 14.3px;
+    color: #797979;
+}
+
+p {
+    line-height: 1.8rem;
+    padding-top: 9px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-family: 'basic-L';
+    color:#222222;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+h1 {
+    font-size: 3rem;
+    line-height: 4rem;
+}
+h2 {
+    font-family: "basic-EB";
+    font-size: 22px;
+    line-height: 2rem;
+}
+h3 {
+    border-left: 3px solid #F3D55A;
+    padding-left: 15px;
+    font-family: "basic-EB";
+    font-size: 24px;
+    line-height: 2rem;
+}
+h4 {
+    font-size: 16px;
+    line-height: 2.2rem;
+    font-weight: 500;
+}
+h5 {
+    font-size: 12.5px;
+    line-height: 1.4rem
+}
+h6 {
+    font-size: 15px;
+    line-height: 24px;
+}
+
+/*form태그*/
+.form-control{
+    padding: .375rem 1rem;
+    color:#222222;
+    height: calc(1.5em + .75rem + 8px);
+}
+.form-control::placeholder {
+    color: #CCCCCC;
+}
+.form-group{
+    margin-bottom: 38px;
+}
+
+/* 커스텀 스크롤바 */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+::selection{
+  background: rgb(0,123,255,0.3);
+}
+
+/*커스텀 체크박스, 라디오 customCheck1*/
+.custom-control-label::before {
+    position: absolute;
+    top: 0.25rem;
+    left: -1.5rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    content: "";
+    background-color: #fff;
+    border: #adb5bd solid 1px;
+  }
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #F3D55A;
+    background-color: #F3D55A;
+}
+
+/* ==========================================================================
+    퀵 스타일 지정 : 원하는 태그에 클래스 속성 추가
+    예) <h1 class="text-yellow">글자를 노란색으로</h1>
+   ========================================================================== */
+/*글자색*/
+.text-black{color:#222222;}
+.text-yellow{color:#F3D55A;}
+
+/*배경색*/
+.bg-grey{background-color: #F9F8EF;}
+.bg-black{background-color: #222222;}
+.bg-yellow{background-color: #F3D55A;}
+
+/*네비바 거리유지*/
+.pad{
+    height: 180px;
+}
+
+/*필터바 거리유지*/
+.pad-filter{
+    height: 20px;
+}
+
+/*패딩값*/
+.roomy-200 {
+    padding-top: 210px;
+}
+.roomy-120 {
+    padding-top: 120px;
+    padding-bottom: 130px;
+}
+.roomy-100 {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.roomy-80 {
+    padding-top: 100px;
+    padding-bottom: 80px;
+}
+.roomy-70 {
+    padding-top: 70px;
+    padding-bottom: 60px;
+}
+.roomy-60 {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.roomy-50 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.roomy-40 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.roomy-20 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.roomy-end {
+    padding-bottom: 250px;
+}
+
+/*마진 값*/
+.m-top-45 {
+    margin-top: 45px;
+}
+.m-top-40 {
+    margin-top: 40px;
+}
+.m-top-25 {
+    margin-top: 25px;
+}
+.m-top-20 {
+    margin-top: 20px;
+}
+.m-top-15 {
+    margin-top: 15px;
+}
+.m-bottom-250 {
+    margin-bottom: 250px;
+}
+.m-bottom-70 {
+    margin-bottom: 70px;
+}
+.m-bottom-50 {
+    margin-bottom: 50px;
+}
+.m-bottom-30 {
+    margin-bottom: 30px;
+}
+.m-bottom-20 {
+    margin-bottom: 20px;
+}
+
+
+/* ==========================================================================
+    버튼
+   ========================================================================== */
+button{
+    border: none;
+    background: none;
+}
+.btn{
+    -webkit-transition: all 0.6s;
+    transition: all 0.6s;
+    font-size:14px;
+    font-weight: 600;
+    border:1px solid;
+    padding: 1rem 4rem;
+}
+/*메인 - 회원가입 버튼*/
+.btn-primary{
+    color: #333;
+    background-color: #fff;
+    border:1px solid;
+    border-color: #fff;
+}
+.btn-primary:hover{
+    background-color: #eee;
+    border-color: #eee;
+    color:#00a885;
+}
+
+/*네비게이션 로그인 버튼*/
+.btn-nav{
+    color: #fff;
+    background-color:  #F3D55A;
+    border:none;
+    border-color: #fff;
+    font-size: 16px;
+    font-family: "basic-EB";
+    padding: 0.68rem 1.7rem;
+}
+.btn-nav:hover{
+    background: none;
+    border: 1px solid #F3D55A;
+    color:#F3D55A;
+    
+}
+
+/*레시피게시판 - 메뉴카테고리 버튼*/
+.btn-recipe{
+    font-family: "basic-R";
+    color: #888888;
+    background-color:  #EEEEEE;
+    border:none;
+    margin-right: 5px;
+    padding: 0.5rem 2.5rem;
+}
+.btn-recipe:hover{
+    background-color:#DDDDDD;
+}
+.btn-recipe:focus{
+    background-color: #F3D55A;
+    color:#FFF;
+}
+
+/*레시피 게시판 - 검색버튼*/
+.input-group-append .btn{
+    z-index: 0;
+}
+/* ==========================================================================
+    메인화면 스타일
+   ========================================================================== */
+.fix{
+    overflow: hidden;
+}
+.overlay {
+    background-color: rgba(41, 39, 34, 0.55);
+    width: 100%;
+    height:100%;
+    position: absolute;
+    left:0;
+    top: 0;
+}
+
+/*메인 이미지 삽입*/
+.home{
+    background: url(../images/메인이미지.jpg) no-repeat top center;
+    background-size: cover;
+    position: relative;
+    padding-top: 300px;
+    padding-bottom: 320px;
+    width:100%;
+}
+
+.home h1{
+    font-size:92px;
+    font-family: 'BI';
+    font-style: italic;
+    margin-bottom:20px;
+    line-height: 105px;
+    text-align: center;
+}
+
+.home h2{
+    font-size:28px;
+    font-family: 'basic-R';
+    line-height: 3rem;
+}
+
+/*메뉴 롤링*/
+.text {
+    position: relative;
+    width: 450px;
+    top: 20%;
+    
+    height: 40px;
+    transform: translate(-50%, -50%);
+}
+.word {
+    position: absolute;
+    opacity: 0;
+    top: 46.8%;
+    width: 1200px;
+    transform: translate(-52%, -50%);
+}
+.letter {
+    display: inline-block;
+    position: relative;
+    transform: translate(25px);
+    transform-origin: 50% 50% 25px;
+}
+.letter.out {
+    transform: rotateX(90deg);
+    transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+.letter.behind {
+    transform: rotateX(-90deg);
+}
+.letter.in {
+    transform: rotateX(0deg);
+    transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 사이트 소개 */
+.about h2{
+    font-family: 'BI';
+    font-style: italic;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 8px;
+}
+.about h1 {
+    font-family: 'BI';
+    font-style: italic;
+    font-size: 65px;
+    line-height: 80px;
+}
+.about h6{
+    font-family: "basic";
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+
+
+/* ==========================================================================
+    서비스 소개
+   ========================================================================== */
+/*서비스1,2*/
+.service1 p,
+.service2 p{
+    padding-top: 20px;
+}
+
+/*서비스3*/
+.img-circle {
+    border-radius: 50%;
+  }
+.separator{
+    width:30px;
+    height: 1px;
+    background-color: #ddd;
+    margin:13px auto;
+}
+.separator2{
+    width:250px;
+    height: 1px;
+    background-color: #ddd;
+    margin:13px auto;
+}
+.separator3{
+    width:360px;
+    height: 1px;
+    background-color: #ddd;
+    margin:80px auto;
+}
+.separator4{
+    width:326px;
+    height: 1px;
+    background-color: #ddd;
+    margin:15px auto;
+}
+
+
+
+/* ==========================================================================
+    로그인페이지
+   ========================================================================== */
+.login-form{
+    width: 100%;
+    max-width: 380px;
+    padding: 40px 30px;
+    margin: auto;
+    height: 95vh;
+}
+
+.btn-login, .btn-login:hover {
+    font-family: "basic-EB";
+    font-size: 18px;
+    width: 100%;
+    color: #fff;
+    background-color: #F3D55A;
+    border: 1px solid;
+    border-color: #F3D55A;
+}
+.btn-login:active{
+    background-color: #f7df7f;
+}
+
+.form-group-id{
+    margin-bottom: -1px;
+    width: 100%;
+}
+
+.form-group-id > .form-control{
+    border-radius: 4px 4px 0 0;
+    height: 50px;
+}
+
+.form-group-pwd > .form-control{
+    border-radius: 0 0 4px 4px;
+    height: 50px;
+}
+
+.login-sns{
+    font-size: 12px;
+    font-weight: 600;
+}
+.login-sns p{
+    margin-bottom: 9px;
+}
+.sns{
+    height: 50px;
+    font-size: 14px;
+    font-family: "basic-EB";
+}
+
+/*SNS 간편로그인*/
+.sns > ul{
+    padding: 0;
+}
+
+.sns li{
+    display:inline;
+    padding-right:30px;
+}
+.sns li:last-child{
+    display:inline;
+    padding-right:0px;
+}
+.sns a{
+    color: #797979;
+    text-decoration: none;
+}
+.icon-sns{
+    border-radius: 50%;
+}
+.sns-list{
+    display: inline;
+}
+
+/*footer*/
+.footer-login{
+    font-family: "basic-EB";
+    font-size: 10.5px;
+}
+
+
+
+/* ==========================================================================
+    회원가입 페이지
+   ========================================================================== */
+ .sign-form{
+    width: 100%;
+    max-width: 450px;
+    padding: 40px 30px;
+    margin: auto;
+}
+.sign-title p{
+    line-height: 1.55rem;
+}
+label{
+    font-family: "basic-R";
+    font-size: 15px;
+    font-weight: 900;
+    color: #222222;
+    margin-bottom: .75rem;
+}
+.sign-form .form-group p{
+    font-size: 12.5px;
+    padding: 0;
+    padding-top: 2px;
+    line-height: 0.5rem;
+
+}
+.btn-sign, .btn-sign:hover {
+    font-family: "basic-EB";
+    font-size: 19.5px;
+    width: 100%;
+    color: #fff;
+    background-color: #F3D55A;
+    border: 1px solid;
+    border-color: #F3D55A;
+    padding: 2rem 4rem;
+}
+.btn-sign:active{
+    background-color: #f7df7f;
+}
+
+/*채식레벨*/
+.food{
+    text-align: justify;
+}
+.food img{
+    display: inline;
+}
+.food:after{content:""; display: inline-block; width: 100%; height: 0;}
+
+/*약관동의*/
+.terms{
+    width: 100%;
+    height: 240px;
+    border: 1px solid;
+    border-color: #ced4da;
+    padding: 23px 23px 6px 16px;
+}
+.terms label{
+    font-family: "basic-L";
+    font-size: 14px;
+}
+#all{
+    font-family: "basic-EB";
+}
+.terms a{
+    color: #222222;
+    text-decoration: underline;
+}
+
+
+/* ==========================================================================
+    회원가입완료 페이지
+   ========================================================================== */
+
+.complete{
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    height: 87vh;
+}
+.complete img{
+    margin: 45px;
+}
+.complete h1{
+    font-family: "basic-EB";
+    font-size: 2.25rem;
+    line-height: 3rem;
+}
+.character{
+    width: 290px;
+}
+
+.btn-complete, .btn-complete:hover {
+    font-family: "basic-EB";
+    font-size: 15px;
+    width: 250px;
+    color: #fff;
+    background-color: #F3D55A;
+    border: 1px solid;
+    border-color: #F3D55A;
+}
+.btn-complete:active{
+    background-color: #f7df7f;
+}
+
+
+/* ==========================================================================
+    레시피 게시판
+   ========================================================================== */
+.today_recipe{
+    padding-bottom: 30px;
+}
+
+/* 필터링 */
+.nav-filter{
+    height: 93px;
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+    .sticky-top {
+      top: 64px;
+      z-index: 1;
+    }
+  }
+
+.filters {
+    margin-top: 19px;
+}
+.filters > div{
+    float: right;
+    margin-right: 19px;
+}
+.filters > div:first-child{
+    margin-right: 0px;
+}
+
+
+
+/*레시피 리스트*/
+.lists > div{
+margin-bottom: 64px;
+}
+
+.array{
+    float: right;
+}
+
+
+/* ==========================================================================
+    레시피작성 페이지
+   ========================================================================== */
+.sign-title p{
+    line-height: 1.55rem;
+}
+.recipe-form label{
+    height: 40px;
+    line-height: 40px;
+}
+.recipe-form .form-group p{
+    font-size: 12.5px;
+    padding: 0;
+    padding-top: 2px;
+    line-height: 0.5rem;
+
+}
+.btn-sign, .btn-sign:hover {
+    font-family: "basic-EB";
+    font-size: 19.5px;
+    width: 100%;
+    color: #fff;
+    background-color: #F3D55A;
+    border: 1px solid;
+    border-color: #F3D55A;
+    padding: 2rem 4rem;
+}
+.btn-sign:active{
+    background-color: #f7df7f;
+}
+
+.write .btn-sign, .write .btn-sign:hover {
+    font-family: "basic-EB";
+    font-size: 19.5px;
+    width: 80%;
+    color: #fff;
+    background-color: #F3D55A;
+    border: 1px solid;
+    border-color: #F3D55A;
+    padding: 1rem 2rem;
+    margin-top: 20px;
+}
+.write .btn-sign:active{
+    background-color: #f7df7f;
+}
+/*채식레벨*/
+.food{
+    text-align: justify;
+}
+.food img{
+    display: inline;
+}
+.food:after{content:""; display: inline-block; width: 100%; height: 0;}
+
+
+
+.card{
+    margin-bottom: 10px;
+}
+.card-body{
+    padding-top: 60px;
+    padding-bottom: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.step{
+    color: #F3D55A;
+    font-size: 35px;
+    text-align: right;
+}
+
+/* ==========================================================================
+    갤러리 페이지
+   ========================================================================== */
+.test:hover{
+   background-color: #00a885; 
+}
