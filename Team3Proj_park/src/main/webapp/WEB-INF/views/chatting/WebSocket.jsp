@@ -61,7 +61,7 @@
 	//서버와 연결된 소켓 클라이언트 생성
 	$(document).ready(function(){
 		//wsocket = new WebSocket("ws://172.30.1.14:8080<c:url value='/chat-ws.do'/>");
-		wsocket = new WebSocket("ws://192.168.219.101:8080<c:url value='/chat-ws.do'/>");
+		wsocket = new WebSocket("ws://localhost:8080<c:url value='/chat-ws.do'/>");
 		//서버와 연결된 소켓에 이벤트 등록(open,close,message,error)
 		wsocket.onopen = open;
 		wsocket.onclose=function(){
@@ -112,7 +112,7 @@
 	
 	//서버의 메세지를 뿌려주기 위한 함수
 	var appendServerMessage =function(msg){
-       $('#chatMessage').append("<div style='clear:both;text-align:center; background-color: #ffF3D55A; margin-top:10px; margin-bottom:10px; padding:10px'>" + msg + "</div>");
+       $('#chatMessage').append("<div style='clear:both;text-align:center; color: white;background-color: #ffF3D55A; margin-top:10px; margin-bottom:10px; padding:10px'>" + msg + "</div>");
        $("#chatMessage").scrollTop($("#chatMessage")[0].scrollHeight);//스크롤 내리기
     };
     //상대방의 닉네임을 뿌려주기 위한 함수

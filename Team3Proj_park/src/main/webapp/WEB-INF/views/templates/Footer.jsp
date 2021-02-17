@@ -10,7 +10,7 @@
 <div id="chatbot_container">
 	<!-- chatbot_header -->
 	<div id="chatbot_header">
-		<img id="vevebot_icon" src="/veve/resources/chatbot/VEVEbot.png" alt="베베봇"/>
+		<img id="vevebot_icon" src="/veve/resources/chatbot/VEVE_chatbot2.jpg" alt="베베봇"/>
 		<div id="chatbot_name"><strong>베베봇</strong></div>
 		<div id="chatbot_header_close">
 			<svg height="20" width="20">
@@ -48,19 +48,21 @@
 <!-- 우측 하단의 버튼 -->
 <c:if test="${empty UserID}" var="IsLogin">
 <a href="javascript:login()">
-	<img id="userChat_img" src="/veve/resources/chatbot/userChat.png" alt="유저  채팅 이미지"/>
+	<img id="userChat_img" src="/veve/resources/chatbot/VEVE_userchat2.jpg" alt="유저  채팅 이미지"/>
 </a>
 </c:if>
 <c:if test="${! IsLogin}">
 <a href="javascript:openChatPop('<c:url value="/chatting/WebSocket.do"/>', 'userChat');">
-	<img id="userChat_img" src="/veve/resources/chatbot/userChat.png" alt="유저  채팅 이미지"/>
+	<img id="userChat_img" src="/veve/resources/chatbot/VEVE_userchat2.jpg" alt="유저  채팅 이미지"/>
 </a>
 </c:if>
 
-
+<img id="chatbot_img" src="/veve/resources/chatbot/VEVE_chatbot1.jpg" alt="베베봇"/>
+<!--  
 <img id="chatbot_img" src="/veve/resources/chatbot/VEVEbot.png" alt="베베봇"
 	onmouseover="this.src='/veve/resources/chatbot/VEVEbot_hover.png'" 
 	onmouseout="this.src='/veve/resources/chatbot/VEVEbot.png'" />
+-->
 <!-- ----------------------------------------------------------chatbot -->
 
 

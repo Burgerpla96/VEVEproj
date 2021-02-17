@@ -67,8 +67,8 @@
    	 	//console.log("까페 포지션"+cafePositions);
    		
    		
-   		var markerRestaurantImage = '/veve/resources/restaurant/images/restaurant.png';//마커이미지 주소
-   		var markerCafeImage = '/veve/resources/restaurant/images/cafe.png';
+   		var markerRestaurantImage = '/veve/resources/restaurant/images/VEVE_res_marker.png';//마커이미지 주소
+   		var markerCafeImage = '/veve/resources/restaurant/images/VEVE_cafe_marker.png';
 
    		createRestaurantMarkers(); // 식당 마커를 생성하고 식당 마커 배열에 추가합니다
    		createCafeMarkers(); // 까페 마커를 생성하고 까페 마커 배열에 추가합니다
