@@ -22,4 +22,6 @@ public interface GallaryCommentService {
 	List<GallaryCommentDTO> selectCommentList(Map map);
 	   
 	   int insertAR(GallaryCommentDTO commentDTO);
+	   
+	   List<GallaryCommentDTO> selectCommentListAR(Map map);
 }

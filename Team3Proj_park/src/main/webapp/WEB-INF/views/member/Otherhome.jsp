@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	<link rel="stylesheet"
+	href="<c:url value="/resources/assets/css/galleryList.css"/>">
+	
 <script>
 $(function() {   
     	var arraydata;
@@ -73,20 +76,31 @@ $(function() {
 
 <!-- 새로 만든 스타일 -->
 <style>
-#first_container {
-	padding-top: 200px;
-	/* 132px이 딱 맞는 크기*/
+/*마이페이지 배경색*/
+body {
+	background: #ff7e5f;
+	background: -webkit-linear-gradient(to right, #ff7e5f, #feb47b);
+	background: linear-gradient(to right, #ff7e5f, #feb47b);
+	min-height: 100vh;
 }
 
-#basicProfile {
-	text-align: center;
+.rounded-lg {
+	border-radius: 1rem;
 }
 
+div.h4 {
+	line-height: 1rem;
+}
+
+/*==========================================
+* 피드&모달
+* ==========================================*/
 #profileImage {
 	width: 150px;
 	height: 150px;
 	border-radius: 70%;
 	overflow: hidden;
+	border: 1px solid #dddddd;
 }
 
 .nav-item {
@@ -100,293 +114,416 @@ $(function() {
 .nav-item a.active {
 	background-color: #F3D55A !important;
 }
+
+.white_content {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.6);
+	opacity: 0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+	z-index: 10;
+}
+
+.white_content:target {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.white_content>div {
+	position: absolute;
+	top: 15%;
+	left: 15%;
+	width: 75%;
+	height: 75%;
+	background-color: white;
+	overflow: hidden;
+}
+
+.gallery-item a:hover {
+	color: white;
+	text-decoration: underline;
+}
+
+#user_profile {
+	width: 45px;
+	height: 45px;
+	border-radius: 70%;
+	overflow: hidden;
+}
+
+#board_comment::-webkit-scrollbar {
+	display: none;
+}
 </style>
-<!-- 새로 만든 스타일 -->
+
+<!-- 네비게이션바 거리유지 -->
+<section class="pad">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">d</div>
+		</div>
+	</div>
+</section>
+<!--네비게이션바 거리유지 끝-->
 
 
-<!-- 새로 만든 틀 -->
-<div class="container" id="first_container">
-	<div class="row">
-		<div class="col-md-12">
 
-			<div class="row">
-				<div class="col-md-4">
-					<c:if test="${empty kakaofiledto}" var="isNotKakaologin">
-
-						<img id="profileImage" alt="이미지 오류"
-							src='<c:url value="/upload/${filedto.f_name}"/>'
-							onerror="this.src='/veve/resources/assets/images/basic_profile.gif';" />
-
-					</c:if>
-					<c:if test="${not isNotKakaologin }">
-						<img id="profileImage" alt="이미지 오류" src='${kakaofiledto.f_name}'
-							onerror="this.src='/veve/resources/assets/images/basic_profile.gif';" />
-
-					</c:if>
-					<p>
-						<i
-							class="fa fa-certificate fa-fw w3-margin-right w3-large w3-text-teal"></i>${userdto.nickname}</p>
-					<p>
-						<i
-							class="fa fa-certificate fa-fw w3-margin-right w3-large w3-text-teal"></i>${userdto.vg_level}</p>
+<!--마이홈 기본정보-->
+<section class="MyHome_info m-bottom-100">
+	<div class="container">
+		<div class="card">
+			<div class="card-body">
+				<!--개인정보 편집 드롭다운-->
+				<div class="row right">
+				
+				
+				<!-- 검색폼 -->
+                  <form method="get" action="<c:url value="/Member/OtherHome.do"/>">
+                     <div class="input-group mb-3">
+                     <input type="text" class="form-control" placeholder="계정 검색" id="search" name="otherid" >
+                     <div class="input-group-append">
+                        <button class="btn btn-more" id="serarchBtn" type="submit"><i class="fas fa-search"></i></button>
+                     </div>
+                     </div>
+                  </form>
+				
 					
-					<a id="modal-193710" href="#modal-container-193710" role="button"
-						class="btn" data-toggle="modal">팔로워</a>
+				</div>
+				<!--개인정보 편집 드롭다운 끝-->
 
-					<div class="modal fade" id="modal-container-193710" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="myModalLabel">Modal title</h5>
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">×</span>
-									</button>
-								</div>
-								<div class="modal-body">...</div>
-								<div class="modal-footer">
+				<!--프로필 사진-->
+				<div class="row" style="clear: both;">
+					<div class="col-md-12 text-center">
+						<c:if test="${empty KakaoUserId}" var="isNotKakaologin">
 
-									<button type="button" class="btn btn-primary">Save
-										changes</button>
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Close</button>
-								</div>
-							</div>
+							<img id="profileImage" alt="이미지 오류"
+								src='<c:url value="/upload/${filedto.f_name}"/>'
+								onerror="this.src='/veve/resources/assets/images/basic_profile.gif';" />
 
-						</div>
+						</c:if>
+						<c:if test="${not isNotKakaologin }">
+							<img id="profileImage" alt="이미지 오류" src='${KakaoUserImg}'
+								onerror="this.src='/veve/resources/assets/images/basic_profile.gif';" />
 
+						</c:if>
 					</div>
+				</div>
 
-					<a id="modal-751188" href="#modal-container-751188" role="button"
-						class="btn" data-toggle="modal">팔로잉</a>
-
-					<div class="modal fade" id="modal-container-751188" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="myModalLabel">Modal title</h5>
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">×</span>
-									</button>
-								</div>
-								<div class="modal-body">...</div>
-								<div class="modal-footer">
-
-									<button type="button" class="btn btn-primary">Save
-										changes</button>
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">Close</button>
-								</div>
-							</div>
-
+				<!--채식 레벨-->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="vglevel_div">
+							<img id="vg_level_img" alt="채식스타일"
+								src='<c:url value="/resources/assets/images/level_default.png"/>'
+								style="width: 30px; height: 30px;" /> <span
+								class="vg_level_text"> ${userdto.vg_level}</span>
 						</div>
-
 					</div>
-					<!-- 모달 -->
-					<div>
+				</div>
+
+				<!--닉네임-->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<h2>${userdto.nickname}</h2>
+					</div>
+				</div>
+
+				<!--팔로워/팔로잉   ${followerinfos} ${followinginfos}-->
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="follow_div">
+							<a id="modal-193710" href="#modal-container-193710"
+								data-toggle="modal">
+								<p>
+									팔로워 <span id="followerCountSpan">${followerinfos.size()}</span>
+								</p>
+							</a>
+
+							<p style="font-family: basic-R; font-size: 10px;">ㅣ</p>
+
+							<a id="modal-751188" href="#modal-container-751188"
+								data-toggle="modal">
+								<p>
+									팔로잉 <span>32</span>
+								</p>
+							</a>
+						</div>
+					</div>
+				</div>
+				
+				<!-- 팔로우 버튼 -->
+				<div class="col-md-12 text-center m-top-25">
 						<c:if test="${empty isfollowing}" var="isNotFollowing">
-							<button id="follow" class="btn btn-success btn-sm">팔로우</button>
-							<button id="following" class="btn btn-success btn-sm" hidden="">팔로잉</button>
-
+							<button id="follow" class="btn btn-nav" onclick='location.reload(true);'>팔로우</button>
+							<button id="following" class="btn btn-nav" hidden="" onclick='location.reload(true);'>팔로잉</button>
+							<script>
+								var followerCountSpan = Number($('#followerCountSpan').html());
+								$('#followerCountSpan').html(followerCountSpan);
+							</script>
 						</c:if>
 						<c:if test="${not isNotFollowing }">
-							<button id="following" class="btn btn-success btn-sm">팔로잉</button>
-							<button id="follow" class="btn btn-success btn-sm " hidden="">팔로우</button>
+							<button id="following" class="btn btn-nav" onclick='location.reload(true);'>팔로잉</button>
+							<button id="follow" class="btn btn-nav " hidden="" onclick='location.reload(true);'>팔로우</button>
+							<script>
+								var followerCountSpan = Number($('#followerCountSpan').html());
+								$('#followerCountSpan').html(followerCountSpan);
+							</script>
 						</c:if>
 
 					</div>
 
-
-					<div>
-						<form method="get" action="<c:url value="/Member/OtherHome.do"/>">
-							<input id="search" name="otherid" style="width: 200px" /> <input
-								id="serarchBtn" type="submit" class="btn" value="research">
-						</form>
-					</div>
-
-
-				</div>
-				<div class="col-md-4">
-					<h2>Heading</h2>
-					<p>Donec id elit non mi porta gravida at eget metus. Fusce
-						dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-						ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-						magna mollis euismod. Donec sed odio dui.</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-				</div>
-				<div class="col-md-4">
-					<div id="card-560222">
-						<div class="card">
-							<div class="card-header">
-								<a class="card-link" data-toggle="collapse"
-									data-parent="#card-560222" href="#card-element-992035">Collapsible
-									Group Item #1</a>
-							</div>
-							<div id="card-element-992035" class="collapse show">
-								<div class="card-body">Anim pariatur cliche...</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<a class="card-link" data-toggle="collapse"
-									data-parent="#card-560222" href="#card-element-656013">Collapsible
-									Group Item #2</a>
-							</div>
-							<div id="card-element-656013" class="collapse show">
-								<div class="card-body">Anim pariatur cliche...</div>
-							</div>
-						</div>
-					</div>
-					<div class="carousel slide" id="carousel-464309">
-						<ol class="carousel-indicators">
-							<li data-slide-to="0" data-target="#carousel-464309"></li>
-							<li data-slide-to="1" data-target="#carousel-464309"></li>
-							<li data-slide-to="2" data-target="#carousel-464309"
-								class="active"></li>
-						</ol>
-						<div class="carousel-inner">
-							<div class="carousel-item">
-								<img class="d-block w-100" alt="Carousel Bootstrap First"
-									src="https://www.layoutit.com/img/sports-q-c-1600-500-1.jpg" />
-								<div class="carousel-caption">
-									<h4>First Thumbnail label</h4>
-									<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-										quam. Donec id elit non mi porta gravida at eget metus. Nullam
-										id dolor id nibh ultricies vehicula ut id elit.</p>
-								</div>
-							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100" alt="Carousel Bootstrap Second"
-									src="https://www.layoutit.com/img/sports-q-c-1600-500-2.jpg" />
-								<div class="carousel-caption">
-									<h4>Second Thumbnail label</h4>
-									<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-										quam. Donec id elit non mi porta gravida at eget metus. Nullam
-										id dolor id nibh ultricies vehicula ut id elit.</p>
-								</div>
-							</div>
-							<div class="carousel-item active">
-								<img class="d-block w-100" alt="Carousel Bootstrap Third"
-									src="https://www.layoutit.com/img/sports-q-c-1600-500-3.jpg" />
-								<div class="carousel-caption">
-									<h4>Third Thumbnail label</h4>
-									<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-										quam. Donec id elit non mi porta gravida at eget metus. Nullam
-										id dolor id nibh ultricies vehicula ut id elit.</p>
-								</div>
-							</div>
-						</div>
-						<a class="carousel-control-prev" href="#carousel-464309"
-							data-slide="prev"><span class="carousel-control-prev-icon"></span>
-							<span class="sr-only">Previous</span></a> <a
-							class="carousel-control-next" href="#carousel-464309"
-							data-slide="next"><span class="carousel-control-next-icon"></span>
-							<span class="sr-only">Next</span></a>
+				<div class="row">
+					<div class="col-md-12 text-center roomy-40">
+						<hr />
 					</div>
 				</div>
+				
+				
+				
+				<!-- 컨텐츠 -->
+				<div class="tabbable" id="category_tabs">
+					<div class="tab-content">
+						<!-- tab1 내 피드 -->
+						<div class="tab-pane active" id="tab1">
+							<!-- sumnail  -->
+							<main style="padding-top: 10px">
+								<div class="container_main">
+									<div class="gallery" id="appendPosition">
+										<c:forEach var="item" items="${boardList}" varStatus="var">
+											<div class="gallery-item" tabindex="0">
+												<img
+													src="<c:url value='/upload/${fileList[var.index].fileName}'/>"
+													class="gallery-image" alt=""
+													style="width: 300px; height: 300px">
+												<div class="gallery-item-info"
+													onclick="view(${item.gallary_no})"
+													style="width: 300px; height: 300px">
+													<ul>
+														<li class="gallery-item-likes"><span
+															class="visually-hidden">Likes:</span><i
+															class="fas fa-heart" aria-hidden="true"></i>
+															${likeList[var.index] }</li>
+														<li class="gallery-item-comments"><span
+															class="visually-hidden">Comments:</span><i
+															class="fas fa-comment" aria-hidden="true"></i>
+															${commentList[var.index] }</li>
+													</ul>
+												</div>
+											</div>
+										</c:forEach>
+									</div>
+								</div>
+								<!-- End of container -->
+								<a id="a_open" href="#open" hidden=""></a>
+							</main>
+							<!-- sumnail  -->
+
+						</div>
+						<!-- tab1 내 피드 -->
+					</div>
+					<!-- 컨텐츠 목록 끝 -->
+				</div>
+				<!--card-->
 			</div>
-			<hr />
-			<!-- tab -->
-			<div class="tabbable" id="category_tabs">
-				<ul class="nav nav-pills justify-content-center">
-					<li class="nav-item"><a class="nav-link active" href="#tab1"
-						data-toggle="tab">내 피드</a></li>
-					<li class="nav-item"><a class="nav-link" href="#tab2"
-						data-toggle="tab">내 레시피</a></li>
-					<li class="nav-item"><a class="nav-link" href="#tab3"
-						data-toggle="tab">스크랩</a></li>
-				</ul>
-				<div class="tab-content">
-					<!-- tab1 내 피드 -->
-					<div class="tab-pane active" id="tab1">
-						<p>내 피드가 들어갈 곳</p>
-						<!-- sumnail  -->
-						<div class="row">
-							<div class="col-md-4">
-								<div class="card">
-									<img class="card-img-top" alt="Bootstrap Thumbnail First"
-										src="https://www.layoutit.com/img/people-q-c-600-200-1.jpg" />
-									<div class="card-block">
-										<h5 class="card-title">Card title</h5>
-										<p class="card-text">
-											Cras justo odio, dapibus ac facilisis i<span>n,
-												egestas eget quam. Donec id elit non mi porta gravida at
-												eget metus. Nullam id dolor id nibh ultricies vehicula ut id
-												elit.</span>
-										</p>
-										<p>
-											<a class="btn btn-primary" href="#">Action</a> <a class="btn"
-												href="#">Action</a>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="card">
-									<img class="card-img-top" alt="Bootstrap Thumbnail Second"
-										src="https://www.layoutit.com/img/city-q-c-600-200-1.jpg" />
-									<div class="card-block">
-										<h5 class="card-title">Card title</h5>
-										<p class="card-text">Cras justo odio, dapibus ac facilisis
-											in, egestas eget quam. Donec id elit non mi porta gravida at
-											eget metus. Nullam id dolor id nibh ultricies vehicula ut id
-											elit.</p>
-										<p>
-											<a class="btn btn-primary" href="#">Action</a> <a class="btn"
-												href="#">Action</a>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="card">
-									<img class="card-img-top" alt="Bootstrap Thumbnail Third"
-										src="https://www.layoutit.com/img/sports-q-c-600-200-1.jpg" />
-									<div class="card-block">
-										<h5 class="card-title">Card title</h5>
-										<p class="card-text">Cras justo odio, dapibus ac facilisis
-											in, egestas eget quam. Donec id elit non mi porta gravida at
-											eget metus. Nullam id dolor id nibh ultricies vehicula ut id
-											elit.</p>
-										<p>
-											<a class="btn btn-primary" href="#">Action</a> <a class="btn"
-												href="#">Action</a>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- sumnail  -->
-
-					</div>
-					<!-- tab1 내 피드 -->
-
-					<!-- 두번째 tab 내 레시피 -->
-					<div class="tab-pane" id="tab2">
-						<p>Section 2. 내 레시피 보여주기</p>
-					</div>
-					<!-- 두번째 tab 내 레시피 -->
-
-					<!-- 세번째 tab 내 레시피 -->
-					<div class="tab-pane" id="tab3">
-						<p>Section 3. 스크랩한 것들</p>
-					</div>
-					<!-- 세번째 tab 내 레시피 -->
-
-
-				</div>
-				<!-- tab-content -->
-			</div>
-			<!-- tab -->
-
-
 		</div>
-		<!--최외각 col-md-12 -->
 	</div>
-	<!-- row -->
-</div>
-<!-- first_container -->
 
+</section>
+<!--마이홈 기본정보 끝-->
+
+
+
+
+
+
+<!-- 모달-팔로워 -->
+<div class="modal fade" id="modal-container-193710" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myModalLabel">팔로워</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							<th>NickName</th>
+							<th>ID</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="following" items="${followerinfos}"
+							varStatus="stauts">
+							<tr>
+								<c:if test="${following.k1n0 eq '1'}" var="isNotKakaologin">
+									<td><img alt="#" style="width: 30px; height: 30px"
+										src='${followerfileinfos[stauts.index]}' /></td>
+								</c:if>
+								<c:if test="${!isNotKakaologin}">
+									<td><img alt="이미지 오류" style="width: 30px; height: 30px"
+										src='<c:url value="/upload/${followerfileinfos[stauts.index]}"/>' /></td>
+								</c:if>
+								<td>${following.nickname}</td>
+								<td>${following.userID}</td>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+
+
+			</div>
+			<div class="modal-footer">
+
+
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+<!-- 모달-팔로워 끝-->
+
+<!-- 모달 팔로잉-->
+<div class="modal fade" id="modal-container-751188" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myModalLabel">팔로잉</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							<th>NickName</th>
+							<th>ID</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="following" items="${followinginfos}"
+							varStatus="stauts">
+							<tr>
+								<c:if test="${following.k1n0 eq '1'}" var="isNotKakaologin">
+									<td><img alt="#" style="width: 30px; height: 30px"
+										src='${followingfileinfos[stauts.index]}' /></td>
+								</c:if>
+								<c:if test="${!isNotKakaologin}">
+									<td><img alt="이미지 오류" style="width: 30px; height: 30px"
+										src='<c:url value="/upload/${followingfileinfos[stauts.index]}"/>' /></td>
+								</c:if>
+								<td>${following.nickname}</td>
+								<td>${following.userID}</td>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+<!-- 모달 팔로잉 끝-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+/*채식 레벨출력*/
+$(document).ready(function(){
+	var option_level = "${userdto.vg_level}";
+	//비건레벨에 따라 채식 스타일 정보 출력
+	if(option_level=="rac"){//락토
+		$('#vg_level_img').attr("src","<c:url value='/resources/assets/images/filter_on2.png'/>");
+		$('.vg_level_text').html("락토");
+	}
+	else if(option_level=="ov"){ //오보
+		$('#vg_level_img').attr("src","<c:url value='/resources/assets/images/filter_on3.png'/>");
+		$('.vg_level_text').html("오보");
+	}
+	else if(option_level=="racov"){//락토오보
+		$('#vg_level_img').attr("src","<c:url value='/resources/assets/images/filter_on4.png'/>");
+		$('.vg_level_text').html("락토-오보");
+	}
+	else if(option_level=="pesco"){//페스코
+		$('#vg_level_img').attr("src","<c:url value='/resources/assets/images/filter_on5.png'/>");
+		$('.vg_level_text').html("페스코");
+	}
+	else if(option_level=="polo"){ //폴로
+		$('#vg_level_img').attr("src","<c:url value='/resources/assets/images/filter_on6.png'/>");
+		$('.vg_level_text').html("폴로");
+	}
+	else if(option_level=="none"){ //논비건
+		$('#vg_level_img').attr("src","<c:url value='/resources/assets/images/filter_on7.png'/>");
+		$('.vg_level_text').html("채식주의자가 아니에요");
+	}
+	else if(option_level=="vegan"){ //비건
+		$('#vg_level_img').attr("src","<c:url value='/resources/assets/images/filter_on1.png'/>");
+		$('.vg_level_text').html("비건");
+	}
+	
+	
+});
+
+</script>

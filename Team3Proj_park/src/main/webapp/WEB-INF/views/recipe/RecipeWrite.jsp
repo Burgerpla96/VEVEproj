@@ -36,6 +36,21 @@
 	cursor:pointer;
 }
 
+.dragAndDropDiv2 {
+	border: 2px dashed #92AAB0;
+	width: 118px;
+	height : 118px;
+	color: #92AAB0;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 100%;
+	overflow: hidden; 
+	justify-content:center; 
+	align-items:center; 
+	display:flex;
+	cursor:pointer;
+}
+
 .statusbar {
 	border-top: 1px solid #A9CCD1;
 	min-height: 25px;
@@ -137,10 +152,14 @@ opacity:0.4;
 						
 						//drag 영역 클릭시 파일 선택창
 						objDragAndDrop.on('click', function(e) {
-							$('input[type=file]').trigger('click');
+							$('#attach input[type=file]').trigger('click');
 						});
+						
+					
+						
+						
 
-						$('input[type=file]').on('change', function(e) {
+						$('#attach input[type=file]').on('change', function(e) {
 							var files = e.originalEvent.target.files;
 							handleFileUpload(files, objDragAndDrop);
 						});
@@ -199,6 +218,33 @@ opacity:0.4;
 						}
 
 					});
+	
+	
+	function fileOpen(index){
+		$('#st'+index+' input[type=file]').trigger('click');
+		
+		// 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행합니다.
+		$('#st'+index+' input[type=file]').change(function(){
+		   readURL(this,index);
+		});
+	}
+	
+	function readURL(input,index) {
+	 if (input.files && input.files[0]) {
+	  var reader = new FileReader();
+	  
+	  reader.onload = function (e) {
+	   $('#st'+index+' img').attr('src', e.target.result);  
+	  }
+	  
+	  reader.readAsDataURL(input.files[0]);
+	  }
+	}
+	 
+	
+
+	
+	
 </script>
 <style>
 body {
@@ -411,11 +457,20 @@ body {
 										</div>
 
 										<div class="form-group col-md-2">
-											<div
-												style="background-color: pink; width: 118px; height: 118px;">test</div>
+
+											<!-- 서브이미지 등록 -->
+											<div id="st1" >
+												<div class="dragAndDropDiv2" onclick="javascript:fileOpen(1);">
+													<img src="<c:url value="/resources/assets/images/더하기.jpg"/>" alt="임시" style="width:118px; height: 118px"/>
+												</div>
+												
+												<input id="uploadInputBox" type="file"
+													style="display: none;" name="upload" />
+											</div>
+											
 										</div>
 
-										<input type="Button" value="삭제" onclick="delForm()">
+										<input type="Button" class="btn btn-more" value="삭제" onclick="delForm()">
 									</div>
 									<!---->
 								</div>
@@ -423,7 +478,7 @@ body {
 							</div>
 							<!--추가되는 항목 끝-->
 
-							<input type="Button" value="추가" onclick="addForm()">
+							<input type="Button" class="btn btn-more" value="추가" onclick="addForm()">
 
 						</div>
 					</div>
@@ -514,12 +569,12 @@ body {
 	/*채식스타일 & 파일첨부 여부 유효성검사*/
 	$(document).ready(function() {
 		$('form').on('submit', function() {
-
+/*
 			if ($(this).get(0).uploadInputBox.value == "") {
 				alert("대표이미지를 등록해주세요.");
 				$("#uploadInputBox").focus();
 				return false;
-			}
+			}*/
 			if ($(this).get(0).selectlevel.value == "채식스타일을 선택해주세요") {
 				alert("채식스타일을 선택해주세요.");
 				$("#selectlevel").focus();
@@ -589,6 +644,7 @@ body {
 	
 	
 	
+
 	
 	
 	/* 요리순서 추가&삭제 */
@@ -606,13 +662,18 @@ body {
 				+ '" placeholder="예) 슈레드 치즈를 20분간 해동시켜주세요." required></textarea>'
 				+ '</div>'
 				+ '<div class="form-group col-md-2">'
-				+ '<div style="background-color:pink; width:118px; height: 118px;">test</div>'
+					+ '<div id="st'+count+'">'
+						+ '<div class="dragAndDropDiv2" onclick="javascript:fileOpen('+count+');">'
+							+'<img src="<c:url value="/resources/assets/images/더하기.jpg"/>" alt="임시" style="width:118px; height: 118px"/>'
+						+ '</div>'
+						+ '<input id="uploadInputBox" type="file" style="display: none;" name="upload" />'
+					+ '</div>'
 				+ '</div>'
-				+ '<input type="Button" value="삭제" onclick="delForm()">'
+				+ '<input type="Button" class="btn btn-more" value="삭제" onclick="delForm()">'
 				+ '</div>';
 
 		"step0" + count + "<input type='text' name='st"+count+"'>"
-				+ "<input type='Button' value='삭제' onclick='delForm()'>";
+				+ "<input type='Button' class='btn btn-more' value='삭제' onclick='delForm()'>";
 
 		// 추가할 폼(에 들어갈 HTML)
 		var addedDiv = document.createElement("div"); // 폼 생성

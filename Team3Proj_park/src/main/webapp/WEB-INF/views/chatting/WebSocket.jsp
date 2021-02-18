@@ -6,45 +6,67 @@
 <head>
 <meta charset="utf-8">
 <link rel="icon" type="image/png" href="/veve/resources/assets_admin/img/veve_admin_favicon.png">
-<title>VeVe들과의 이야기 방 </title>
+<title>VEVE-TALK</title>
+<style>
+#send_message_icon{
+	cursor: pointer;
+}
+#send_message_icon:hover{
+	-webkit-filter: opacity(.5) drop-shadow(0 0 0 gray);
+	filter: opacity(.5) drop-shadow(0 0 0 gray);
+}
+
+</style>
 </head>
 
-<body>
+<body onresize="parent.resizeTo(550,725)" onload="parent.resizeTo(550,725)">
 <!-- jq -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">	
-
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/style.css"/>"><!-- 템플릿 베이직 CSS -->
 <link href="/veve/resources/assets/css/websocket.css" rel="stylesheet">
 
+
+<section class="logobar bg-black roomy-15">
+    <div class="container">
+        <div class="logo2" style="text-align: right; margin-right:14px;">
+            <img src="<c:url value="/resources/assets/images/로고2.png"/>" alt="로고" >
+        </div>
+    </div>
+</section>
+
+
+<section class="introduce">
+    <div class="container">
+        <div class="sign-title m-top-40">
+            <h3 style="margin-bottom:0;"><strong>베베톡 채팅 (VEVE-TALK)</strong></h3>
+        </div>
+    </div>
+</section>
+
+
 <div class="container">
-	<!-- 점보트론(Jumbotron) -->
-	<div class="jumbotron" style="height:250px; margin:20px"></div>
 
 	<fieldset>
-		<legend>VeVe들과의 이야기 방</legend>
-		<p style="text-align: right"> 나를 포함한 채팅방 인원: <span id="connectionMemberCount" style="color:red"></span></p>
-		<p style="text-align: right"> 나의 닉네임: <span id="nickname">${nickname}</span> </p>
+		<p style="text-align: right; padding:0; margin-bottom:-10px;"> 현재 참여자 수 : <span id="connectionMemberCount" style="color:#00a885"></span></p>
+		<p style="text-align: right"> 닉네임: <span id="nickname">${nickname}</span> </p>
 		
         <div id="chatArea">
-        	<div id="chatMessage" style="height: 400px; background:#2E8B57 ;border-radius: 9px; overflow: auto;"></div>
+        	<div id="chatMessage" style="height: 350px; border-radius:6px; overflow: auto; background:url(<c:url value="/resources/assets/images/베베톡배경.jpg"/>) no-repeat 0 0;background-size:100% auto; background-position:center;"></div>
         </div> <!-- overflow 내용이 많으면 자동으로 스크롤바가 생긴다. -->
 
 
 		<form>​
 			<div class="form-group">
-				
-				<label for="message" class="col-xs-1" style="width:80px;margin-top:10px;">메시지</label>
 				<div class="col-xs-5" style="text-align: center;">
-					<input class="form-control" type="text" id="message"/>
+					<input class="form-control" type="text" id="message" placeholder="전송할 내용을 입력해주세요 :)"/>
+					<img id="send_message_icon" src="/veve/resources/chatbot/send_message_icon.png" alt="보내기 이미지" style="width:28px;height:auto; position: absolute;left:477px;top:563px;"/>
 				</div>
 				<input type="text" style="display:none;"/> <!-- 의미없는 텍스트 박스 -->
-				<input class="btn" style="color: #FFFFFF; background-color: #F3D55A;" type="button" id="sendBtn" value="전송">
 			</div>
 		</form>
-		
-		<div style="font-size: 7px;padding-right: 10px">
-		</div>
+
 	
 		​
 	</fieldset>
@@ -60,7 +82,6 @@
 	
 	//서버와 연결된 소켓 클라이언트 생성
 	$(document).ready(function(){
-		//wsocket = new WebSocket("ws://172.30.1.14:8080<c:url value='/chat-ws.do'/>");
 		wsocket = new WebSocket("ws://localhost:8080<c:url value='/chat-ws.do'/>");
 		//서버와 연결된 소켓에 이벤트 등록(open,close,message,error)
 		wsocket.onopen = open;
@@ -84,7 +105,7 @@
 	
 	
 	//전송버튼 이벤트 처리-클릭시
-	$('#sendBtn').click(function(){
+	$('#send_message_icon').click(function(){
 		sendMessage();
 	});
 	//전송버튼 이벤트 처리-enter입력시
@@ -112,14 +133,14 @@
 	
 	//서버의 메세지를 뿌려주기 위한 함수
 	var appendServerMessage =function(msg){
-       $('#chatMessage').append("<div style='clear:both;text-align:center; color: white;background-color: #ffF3D55A; margin-top:10px; margin-bottom:10px; padding:10px'>" + msg + "</div>");
+       $('#chatMessage').append("<div style='clear:both;text-align:center; color:white; background-color: #ffF3D55A; margin-top:10px; margin-bottom:10px; padding:10px'>" + msg + "</div>");
        $("#chatMessage").scrollTop($("#chatMessage")[0].scrollHeight);//스크롤 내리기
     };
     //상대방의 닉네임을 뿌려주기 위한 함수
     var appendNickname = function(nickname){
     	$('#chatMessage').append(
    			"<div style='margin-top:13px;clear:both;'>"+
-   				"&nbsp;&nbsp;<span style='padding:5px;background:#ffF3D55A ;border-radius: 9px;'>"+nickname+"</span>"+
+   				"&nbsp;&nbsp;<span style='padding:5px;background:#ffF3D55A ;color:white;border-radius: 9px;'>"+nickname+"</span>"+
    			"</div>");
     };
 	//메시지를 DIV태그에 뿌려주기 위한 함수
@@ -129,7 +150,7 @@
 	  		   		"<div class='balloon test_3' style='float: left;'>" + 
 	  		   			"<span>" + msg + "</span>" +
 	  		   		"</div>"+
-	  		   		"<div style='position: relative; bottom: -27px;font-size: 7px;'>"+time+"</div>"+
+	  		   		"<div style='position: relative; bottom: -27px;color:white;font-size: 7px;'>"+time+"</div>"+
 	  		   "</div>");
        $("#chatMessage").scrollTop($("#chatMessage")[0].scrollHeight);//스크롤 내리기
     };
@@ -140,7 +161,7 @@
     				"<div class='balloon test_4' style='float: right;'>" + 
     					"<span>" + msg + "</span>"  + 
     				"</div>"+
-    				"<div style='position: relative; bottom: -27px;font-size: 7px'>"+time+"</div>"+
+    				"<div style='position: relative;color:white; bottom: -27px;font-size: 7px'>"+time+"</div>"+
     			"</div>");
        $("#chatMessage").scrollTop($("#chatMessage")[0].scrollHeight);//스크롤 내리기
     };

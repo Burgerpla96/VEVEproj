@@ -6,9 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.kosmo.veve.model.service.GallaryBoardService;
 import com.kosmo.veve.model.service.GallaryCommentService;
 
 @Service("galcommentService")
@@ -46,14 +44,18 @@ public class GallaryCommentServiceImpl implements GallaryCommentService{
 	
 	//and
 	@Override
-	   public List<GallaryCommentDTO> selectCommentList(Map map) {
-	      return dao.selectCommentList(map);
-	   }
+   public List<GallaryCommentDTO> selectCommentList(Map map) {
+      return dao.selectCommentList(map);
+   }
 
-	   @Override
-	   public int insertAR(GallaryCommentDTO commentDTO) {
-	      return dao.insertAR(commentDTO);
-	   }
-	
+   @Override
+   public int insertAR(GallaryCommentDTO commentDTO) {
+      return dao.insertAR(commentDTO);
+   }
+
+   @Override
+   public List<GallaryCommentDTO> selectCommentListAR(Map map) {
+      return dao.selectCommentListAR(map);
+   }
 
 }

@@ -7,10 +7,10 @@
 
 
 <!-- 네비게이션바 거리유지 -->
-<section class="pad">
+<section class="pad bg-grey">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12">dfadfadf</div>
+			<div class="col-sm-12">d</div>
 		</div>
 	</div>
 </section>
@@ -30,28 +30,33 @@
 				<div class="owl-board">
 					<div id="owl2" class="owl-carousel owl-theme">
 						<div class="item">
-							<img src="<c:url value="/resources/assets/images/레시피1.jpg"/>"
-								alt="오늘의베스트">
+						<a href="http://localhost:8080/veve/RecipeBBS/view.do?rec_no=6">
+							<img src="<c:url value="/resources/assets/images/1.jpg"/>" alt="오늘의베스트">						
+						</a>
 						</div>
 						<div class="item">
-							<img src="<c:url value="/resources/assets/images/레시피1.jpg"/>"
-								alt="오늘의베스트">
+							<a href="http://localhost:8080/veve/RecipeBBS/view.do?rec_no=7">
+								<img src="<c:url value="/resources/assets/images/2.jpg"/>"
+									alt="오늘의베스트">
+							</a>
 						</div>
 						<div class="item">
-							<img src="<c:url value="/resources/assets/images/레시피1.jpg"/>"
-								alt="오늘의베스트">
+							<a href="http://localhost:8080/veve/RecipeBBS/view.do?rec_no=2">
+								<img src="<c:url value="/resources/assets/images/3.jpg"/>"
+									alt="오늘의베스트">
+							</a>
 						</div>
 						<div class="item">
-							<img src="<c:url value="/resources/assets/images/레시피1.jpg"/>"
-								alt="오늘의베스트">
+							<a href="http://localhost:8080/veve/RecipeBBS/view.do?rec_no=4">
+								<img src="<c:url value="/resources/assets/images/4.jpg"/>"
+									alt="오늘의베스트">
+							</a>
 						</div>
 						<div class="item">
-							<img src="<c:url value="/resources/assets/images/레시피1.jpg"/>"
-								alt="오늘의베스트">
-						</div>
-						<div class="item">
-							<img src="<c:url value="/resources/assets/images/레시피1.jpg"/>"
-								alt="오늘의베스트">
+							<a href="http://localhost:8080/veve/RecipeBBS/view.do?rec_no=3">
+								<img src="<c:url value="/resources/assets/images/5.jpg"/>"
+									alt="오늘의베스트">
+							</a>
 						</div>
 					</div>
 
@@ -116,7 +121,7 @@
 					</div>
 					<div id="filter0" class="text-center">
 						<img
-							src="<c:url value="/resources/assets/images/filter_off0.png"/>"
+							src="<c:url value="/resources/assets/images/filter_on0.png"/>"
 							alt="전체"><br />
 					</div>
 

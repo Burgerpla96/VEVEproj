@@ -7,6 +7,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/veve/resources/assets_admin/img/veve_admin_favicon.png">
   <title>VEVE</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">

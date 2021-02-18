@@ -60,9 +60,6 @@
 						</div>
 						<p class="category" style="clear:both;">
 						권한 제거 항목으로 유저 계정을 차단하세요.<br/>
-						 나이순, 게시글, 댓글 순 정렬 넣기<br/>
-						차단 당한 회원, 회원 레벨별 분류, 성별 분류 버튼 만들기</br>
-						분류한 내용대로 총 인원수 알려주기
 						</p>
 					</div>
 					
@@ -145,22 +142,6 @@
 						<div class="col-md-12 text-center">${pagingString }</div>
 					</div>
 					
-				</div><!-- card -->
-			</div><!-- col-md-12 -->
-		</div><!-- row -->
-		
-		
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="header">
-						<div style="float:left; font-size: 20px; font-weight: lighter ; padding: 1px">
-						비건 등급
-						</div><!-- h4 tag의 font-size:20px -->
-						<p class="category" style="clear:both;">
-						드랍다운느낌으로 설명 뿌려주기<br/> 비건 회원별로 볼 수 있는 버튼 만들고 등급별 인원수 뿌려주기
-						</p>
-					</div>
 				</div><!-- card -->
 			</div><!-- col-md-12 -->
 		</div><!-- row -->

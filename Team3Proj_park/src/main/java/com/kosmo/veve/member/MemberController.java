@@ -5,17 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -341,7 +338,7 @@ public class MemberController {
 
 	// 다른 회원 정보로 보내기
 	@RequestMapping("/Member/OtherHome.do")
-	public String otherhome(HttpServletRequest req) {
+	public String otherhome(HttpServletRequest req, Model model) {
 		// 세션에 담긴 filedto,kakaofiledto 삭제
 		req.getSession().removeAttribute("kakaofiledto");
 		req.getSession().removeAttribute("filedto");
@@ -365,7 +362,8 @@ public class MemberController {
 			System.out.println("내 아이디지롱");
 			return "forward:/Member/MyHome.do";
 		}
-
+		
+		
 		req.getSession().setAttribute("otherID", otherID);
 		// 내가 팔로잉중인지 확인
 		map.put("userID", (String) req.getSession().getAttribute("UserID"));
@@ -394,6 +392,90 @@ public class MemberController {
 
 		// otheruser의 팔로워 팔로잉 뽑아올거야
 
+		//followerinfos followinginfos 가져오기
+		// 팔로워 가져오기
+		int follwerCount = service.getFollower(otherID);
+		List<MemberFollowDTO> followeringinfo = service.getFollowerInfo(otherID);
+		List<MemberDTO> followerinfos = new ArrayList<MemberDTO>();
+		List<String> followerfileinfos = new ArrayList<String>();
+
+		for (MemberFollowDTO other : followeringinfo) {
+			map.put("userID", other.getUserID());
+			MemberDTO dto = service.selectOne(map);
+			followerinfos.add(dto);
+			MemberFileDTO follwerfile = service.selectFile(other.getUserID());
+			followerfileinfos.add(follwerfile.getF_name());
+		}
+		System.out.println("여기서 확인:");
+		System.out.println(followerinfos);
+		System.out.println(followerfileinfos);
+		model.addAttribute("follwerCount", follwerCount);
+		model.addAttribute("followerinfos", followerinfos);
+		model.addAttribute("followerfileinfos", followerfileinfos);
+
+		
+		//다른 사람의 feed 가져오기
+		//boardList, fileList, likeList
+		List<GallaryBoardDTO> boardList = gallaryService.selectMyBoardList(map);
+		List<GallaryFileDTO> fileList = gallaryService.selectFileList(map);
+
+		List<String> likeList = new ArrayList<String>();
+		List<String> commentList = new ArrayList<String>();
+		List<List> files = new ArrayList<List>();
+
+		for (int i = 0; i < boardList.size(); i++) {
+			// 리스트 크기만큰 for문을 돌면서 번호에 해당하는 파일들을 List에 담아올꺼야
+			String no = boardList.get(i).getGallary_no();
+			// System.out.println("대장 게시물:"+no);
+			List<String> files2 = new ArrayList<String>();
+
+			// 파일 리스트 돌면서 일치하는 파일들을 List에 넣을꺼야
+			for (int k = 0; k < fileList.size(); k++) {
+				// System.out.println("쫄병 게시물:"+fileList.get(k).getGallary_no());
+				String includeno = fileList.get(k).getGallary_no();
+
+				if (no.equals(includeno)) {
+					// System.out.println("쫄병 게시물:"+fileList.get(k).getGallary_no());
+
+					files2.add(fileList.get(k).getF_name());
+				}
+			}
+
+			files.add(files2);
+
+			// 게시물 번호로 좋아요 갯수를 가져올꺼야
+
+			map.put("gallary_no", no);
+			int likeCount = likeservice.getLikeCount(map);
+			System.out.printf("%s 게실물 , %s 좋아요 갯수 %n", no, likeCount);
+			likeList.add(String.valueOf(likeCount));
+
+			// 게시물 번호로 댓글 수 가져올꺼야
+
+			int commentCount = commentService.getCommentCount(no);
+			System.out.println("댓글수:" + commentCount);
+			commentList.add(String.valueOf(commentCount));
+
+		}
+		System.out.println("게시판 갯수:" + boardList.size());
+		System.out.println("게시판 갯수(파일):" + files.size());
+
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("likeList", likeList);
+		model.addAttribute("commentList", commentList);
+
+		List<Map> fileList3 = new ArrayList<Map>();
+
+		for (int j = 0; j < files.size(); j++) {
+			Map filemap = new HashMap();
+			filemap.put("fileSize", files.get(j).size());
+			filemap.put("fileName", files.get(j).get(0));
+			fileList3.add(filemap);
+		}
+		model.addAttribute("fileList", fileList3);
+		
+		
+		
 		return "member/Otherhome.tiles";
 	}
 

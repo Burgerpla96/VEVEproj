@@ -2,23 +2,17 @@ package com.kosmo.veve.member;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,7 +83,7 @@ public class RestController {
    //private String url = "http://192.168.137.1:8080/veve/upload/";
    //private String url = "http://192.168.45.139:8080/veve/upload/";
    //private String url = "http://172.20.10.2:8080/veve/upload/";
-   private String url = "http://192.168.0.25:8080/veve/upload/";
+   private String url = "http://192.168.50.210:8080/veve/upload/";
    
    
    @CrossOrigin
@@ -631,6 +625,7 @@ public class RestController {
       return gallaryDao.updateFile(fileDTO);
    }
    
+   
    @SuppressWarnings("unchecked")
    @ResponseBody
     @RequestMapping("/gallary/comment") 
@@ -642,7 +637,7 @@ public class RestController {
        
       GallaryBoardDTO gallaryDTO= gallaryService.selectBoardOne(map);
       //List<GallaryFileDTO> gallaryFileDTO = gallaryService.selectFileLists(map);
-      List<GallaryCommentDTO> gallaryCommentDTO = commentService.selectCommentList(map);
+      List<GallaryCommentDTO> gallaryCommentDTO = commentService.selectCommentListAR(map);
       List<MemberFileDTO> memberFileDTO = memberDao.androidCommentUserFile(map);
       //MemberFileDTO profileImage = gallaryService.getProfileImage(map);
           
@@ -661,6 +656,8 @@ public class RestController {
       jsonMain.put("sendData", jArray);
       return jsonMain;
    }
+   
+   
    
       @CrossOrigin
    @RequestMapping(value = "/gallary/commentPost",method=RequestMethod.POST)

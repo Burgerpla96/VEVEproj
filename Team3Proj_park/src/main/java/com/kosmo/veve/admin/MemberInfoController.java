@@ -23,8 +23,8 @@ public class MemberInfoController {
 	@Resource(name="memberService")
 	private MemberServiceImpl memberService;
 	//페이지 사이즈 조정
-	private int pageSize = 3;//한 페이지에 보이는 수
-	private int blockPage = 2;//paging UI 에서 몇번째 페이지까지 선택가능한지
+	private int pageSize = 5;//한 페이지에 보이는 수
+	private int blockPage = 5;//paging UI 에서 몇번째 페이지까지 선택가능한지
 
 
 	//맴버 조회

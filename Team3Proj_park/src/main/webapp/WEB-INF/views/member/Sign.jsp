@@ -396,7 +396,7 @@ function Dosignup(){
                 <p>VERY VEGGI.와 건강한 채식 라이프를 즐길 준비가 되었나요?<br/>기본 정보와 프로필을 작성해주세요 :)</p>
             </div>
 
-            <form action="<c:url value="/Member/UserSignUp.do"/>"  id="form" method="post" enctype="multipart/form-data">
+            <form action="<c:url value="/Member/UserSignUp.do"/>"  id="form" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group">
                     <label for="id">아이디</label>
                     <input type="text" class="form-control" placeholder="아이디" id="id" name="userID">

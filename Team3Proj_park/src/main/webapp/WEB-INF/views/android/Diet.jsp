@@ -534,7 +534,7 @@ p {
 		</div>
 
 
-
+		<!--  
 		<div class="col-md-4" style="padding-left: 15px">
 			<p style="font-family: serif;font-weight: bold;font-size: 2em;">Recommended food</p>
 			<div id="foodname"></div>
@@ -586,6 +586,8 @@ p {
 				<div class="col-md-12"></div>
 			</div>
 		</div>
+		
+		-->
 	</div>
 </div>
 <script type="text/javascript">

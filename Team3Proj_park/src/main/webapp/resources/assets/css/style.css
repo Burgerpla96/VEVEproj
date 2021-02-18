@@ -1,7 +1,7 @@
 /* ==========================================================================
     글씨체
    ========================================================================== */
-@font-face {
+   @font-face {
     src : url("../fonts/NanumSquareRoundL.ttf");
     font-family: "basic"
 }
@@ -138,15 +138,24 @@ h6 {
 /*글자색*/
 .text-black{color:#222222;}
 .text-yellow{color:#F3D55A;}
+.text-gray{color: #aaa;}
 
 /*배경색*/
 .bg-grey{background-color: #F9F8EF;}
 .bg-black{background-color: #222222;}
 .bg-yellow{background-color: #F3D55A;}
 
+/*우측 float*/
+.right{
+    float: right;
+}
+
 /*네비바 거리유지*/
 .pad{
     height: 180px;
+}
+.pad2{
+    height: 131x;
 }
 
 /*필터바 거리유지*/
@@ -190,6 +199,10 @@ h6 {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.roomy-15 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 .roomy-end {
     padding-bottom: 250px;
 }
@@ -213,6 +226,9 @@ h6 {
 .m-bottom-250 {
     margin-bottom: 250px;
 }
+.m-bottom-100 {
+    margin-bottom: 100px;
+}
 .m-bottom-70 {
     margin-bottom: 70px;
 }
@@ -226,6 +242,10 @@ h6 {
     margin-bottom: 20px;
 }
 
+.col-xl-0 {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
 
 /* ==========================================================================
     버튼
@@ -293,6 +313,23 @@ button{
 .input-group-append .btn{
     z-index: 0;
 }
+
+/*마이홈 - 개인정보수정 드롭다운 버튼*/
+.btn-more{
+    transition: all 0.6s;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #dddddd;
+    padding: 0.4rem 1rem;
+    color: #aaa;
+    vertical-align: middle;
+    float: right;
+}
+.btn-more:hover{
+    background-color:#eeeeee;
+    color: #999;
+}
+
 /* ==========================================================================
     메인화면 스타일
    ========================================================================== */
@@ -633,7 +670,7 @@ label{
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
     .sticky-top {
-      top: 64px;
+      top: 130px;
       z-index: 1;
     }
   }
@@ -734,8 +771,45 @@ margin-bottom: 64px;
 }
 
 /* ==========================================================================
-    갤러리 페이지
+    마이 홈
    ========================================================================== */
-.test:hover{
-   background-color: #00a885; 
+.vg_level_text{
+    font-family: 'basic-EB';
+    font-size: 15px;
+    color: #F3D55A;
 }
+.MyHome_info h2{
+    font-family: 'basic-B';
+    font-size: 33px;
+}
+.MyHome_info h3{
+    font-family: 'basic-EB';
+    border: none;
+    padding-left: 15px;
+    font-size: 20px;
+    line-height: 2rem;
+    margin-bottom: 15px;
+}
+
+.vglevel_div{
+    margin-top: 23px;
+    margin-bottom: 14px;
+}
+.follow_div{
+    margin-top: 10px;
+}
+.follow_div p{
+display: inline;
+font-family: 'basic-B';
+font-size: 13px;
+color: #aaaaaa;
+}
+
+.follow_div p span{
+    font-family: 'basic-EB';
+    font-size: 13px;
+    color: #797979;
+    }
+.follow_div a{
+text-decoration: none;
+    }

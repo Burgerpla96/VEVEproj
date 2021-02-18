@@ -24,7 +24,7 @@
         </div>
 
         
-        <form id="form" method="post" action="<c:url value='/Member/Auth/LoginProcess.do'/>" class="needs-validation" novalidate>
+        <form id="form" method="post" action="<c:url value='/Member/Auth/LoginProcess.do'/>" autocomplete="off" class="needs-validation" novalidate >
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="form-group-id">
             <input type="text" autofocus="autofocus" class="form-control" id="uname" placeholder="아이디" name="userID" required>

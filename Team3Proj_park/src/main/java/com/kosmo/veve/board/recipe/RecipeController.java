@@ -1,6 +1,6 @@
 package com.kosmo.veve.board.recipe;
 
-import java.io.File; 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,24 +52,35 @@ public class RecipeController {
    }
    
    @RequestMapping("/RecipeBBS/view.do")
-   public String view(@RequestParam Map map,Model model, HttpServletRequest req) {
+   public String view(@RequestParam Map map,Model model, HttpServletRequest req, HttpSession session) {
       //서비스 호출]
        RecipeDTO recipe= recipeService.selectOne(map);
         List<RecipeFileDTO> recipeFile = recipeService.selectListFile(map);
         
         String userID = recipe.getUserID();
-        
+        //글쓴이 
         map.put("userID", userID);
-        
         //memberDAO메소드 사용) 게시물작성한 유저 정보 &프사 가져올 것
         MemberDTO member = service.selectOne(map);
         MemberFileDTO file= service.selectFile(userID);
+
+        //session id 가져오기
+        String sessionID = session.getAttribute("UserID").toString();
+        Map sessionIDMap = new HashMap();
+        sessionIDMap.put("userID", sessionID);
+        MemberDTO sessionMember = service.selectOne(sessionIDMap);
+        MemberFileDTO sessionFile= service.selectFile(sessionID);
+        
         
         //모델에 추가
-          model.addAttribute("recipe", recipe);
-          model.addAttribute("recipeFile",recipeFile);
-          model.addAttribute("member", member);
-          model.addAttribute("file", file);
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("recipeFile",recipeFile);
+		model.addAttribute("member", member);
+		model.addAttribute("file", file);
+		
+		model.addAttribute("sessionMember", sessionMember);
+		model.addAttribute("sessionFile", sessionFile);
+		  
           
       //뷰정보 반환]
       return "recipe/RecipeView.tiles";

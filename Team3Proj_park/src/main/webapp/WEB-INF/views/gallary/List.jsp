@@ -144,14 +144,16 @@ $(function(){
                		  var like = value["likeCount"];
                		  var comment= value["commentCount"];
                		  
-               		 $('#appendPosition').append(`
-               				<div class="gallery-item" tabindex="0"><img src="`+src+src1+`" class="gallery-image" alt="" style="width: 300px;height: 300px"/>
-               				<div class="gallery-item-info" onclick="view(`+no+`)" style="width:300px;height:300px">
-               				<ul>
-        					<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i>`+like+`</li>
-        					<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i>`+comment+`</li>
-        					</ul></div></div>
-               			`);      
+               		 $('#appendPosition').append(
+               				 '<div class="gallery-item" tabindex="0"><img src="'+src+src1+'" class="gallery-image" alt="" style="width: 300px;height: 300px"/>'+
+               				 '<div class="gallery-item-info" onclick="view('+no+')" style="width:300px;height:300px">'+
+               				 '<ul>'+
+               				 '<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i>'+like+'</li>'+
+               				 '<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i>'+comment+'</li>'+
+               				 '</ul></div></div>'
+               				
+        					
+               			);      
                		  
     				
     			   });//each
@@ -459,7 +461,30 @@ function view(board_no){
 			
 			$(".carousel-inner *").remove();
 			$(".carousel-indicators *").remove();
+/*
+			$.each(files,function(index,value){
+				if(index==0){
+					//appendDivFirst(value,src);
+					$('.carousel-indicators').append('<li data-target="#demo" data-slide-to="0" class="active"></li>');	
+					$('.carousel-inner').append(
+							'<div class="carousel-item active" style="height: 100%; width: 100%;">'+
+							' <img src='+src+value+'class="gallery-image" alt="" style="height:100%; widhth:100%" >'+
+							'</div>'
+				         );	
+				}
+				else if(index != fileCount){
+					$('.carousel-indicators').append('<li data-target="#demo" data-slide-to="'+index+'"></li>');	
+					$('.carousel-inner').append(
+							'<div class="carousel-item" style="height: 100%; width: 100%;">'+
+							'<img src='+src+value+'class="gallery-image" alt="" style="height:100%; widhth:100%" > '+
+							'</div>'
+							);	
+						
+				}
 
+				
+			});//each
+			*/
 			$.each(files,function(index,value){
 				if(index==0){
 					//appendDivFirst(value,src);
@@ -468,6 +493,9 @@ function view(board_no){
 							<div class="carousel-item active" style="height: 100%; width: 100%;">
 				         <img src="`+src+value+`" class="gallery-image" alt="" style="height:100%; widhth:100%" > 
 				        </div> `);	
+					
+				
+					
 				}
 				else if(index != fileCount){
 					$('.carousel-indicators').append('<li data-target="#demo" data-slide-to="'+index+'"></li>');	
